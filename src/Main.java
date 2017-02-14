@@ -1,3 +1,6 @@
+//4737
+//Lab #2
+//COP 3530
 
 import java.util.Scanner;
 
@@ -9,27 +12,34 @@ public class Main {
         System.out.print("Please enter the number of disks: ");
         int numberOfDisks = scanner.nextInt();
         TowerOfHanoi tw = new TowerOfHanoi(numberOfDisks);
+        tw.printNumberOfMoves();
     }
 }
 
 class TowerOfHanoi {
 
-    int disks;
+    private int numberOfMoves = 0;
+    private int disks;
 
     public TowerOfHanoi(int disks) {
         this.disks = disks;
-
-        solve(disks, "A", "B", "C");
+        hanoi(disks, "A", "B", "C");
     }
 
-    public void solve(int n, String start, String auxiliary, String end) {
+    public void hanoi(int n, String start, String auxiliary, String end) {
         if (n == 1) {
             System.out.println("MOVE disk " + n + " FROM Peg " + start + " TO Peg " + end);
         } else {
-            solve(n - 1, start, end, auxiliary);
+            hanoi(n - 1, start, end, auxiliary);
             System.out.println("MOVE disk " + n + " FROM Peg " + start + " TO Peg " + end);
-            solve(n - 1, auxiliary, start, end);
+            hanoi(n - 1, auxiliary, start, end);
         }
+
+        numberOfMoves++;
+    }
+
+    public void printNumberOfMoves(){
+        System.out.println("The total number of moves to move " + disks + " disks is: " + numberOfMoves);
     }
 
 
